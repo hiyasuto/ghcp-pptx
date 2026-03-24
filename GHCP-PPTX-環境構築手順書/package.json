@@ -1,0 +1,14 @@
+{
+  "name": "ghcp-pptx-env-setup-guide",
+  "version": "1.0.0",
+  "description": "GHCP-PPTX 環境構築手順書 PowerPoint 生成",
+  "main": "js/create-slide.js",
+  "scripts": {
+    "build": "node js/create-slide.js"
+  },
+  "dependencies": {
+    "fast-xml-parser": "^5.5.9",
+    "jszip": "^3.10.1",
+    "pptxgenjs": "^3.12.0"
+  }
+}

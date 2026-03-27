@@ -3,6 +3,11 @@
 ## 目的
 - GitHub Copilot CLI が新規 PowerPoint 資料を一貫して作成する際の基本仕様を定義します。
 
+## CLI-only 原則
+- このファイルは GitHub Copilot CLI に自動読込される instruction です。
+- 必須ルールはこのファイルか他の `.github/instructions/*.instructions.md` に置き、VS Code 専用設定には依存しません。
+- 生成後にユーザーがターミナルだけで再実行できる状態を目指します。
+
 ## レイアウト
 - 20 枚以内にまとめてください。
 - スライドサイズは 16:9 にしてください。
@@ -17,6 +22,7 @@
 - まず Markdown でスライド構成を作成してください。
 - 次に Markdown をレビューし、レビュー結果ファイルを残してください。
 - その後、PptxGenJS を使う `create-slide.js` を作成し、`.pptx` を生成してください。
+- テーマ配下の `package.json` には `npm run build:pptx` のような再実行可能な script を含めてください。
 - 最後に表紙と末尾スライドを整え、最終化メモを残してください。
 
 ## ファイル構成
@@ -40,3 +46,7 @@
 ## テンプレート
 - 表紙は `templates/header.pptx`、末尾は `templates/footer.pptx` を基準にしてください。
 - 厳密なテンプレート差し替えが難しい場合は、同等のレイアウトを deck 内で再現してください。
+
+## 再実行性
+- 生成した `create-slide.js` は人が読める構成にしてください。
+- 生成した deck を再ビルドするコマンドと手順は、必要ならテーマ配下の `README` か最終化メモに簡潔に残してください。

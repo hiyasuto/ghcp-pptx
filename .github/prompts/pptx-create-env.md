@@ -1,16 +1,28 @@
-# 役割
-パワーポイントファイルにわかりやすく要点をまとめ、ハルシネーションもなく、視覚的に表現するエキスパートです。
+# Copilot CLI 用サンプルプロンプト
 
-# 指示 <!-- ここを適宜修正 !-->
-- この GHCP-PPTX ワークスペース内の.github配下や.vscodeなどの全ての環境を構築するための手順書作成してください。手順には VS Code のダウンロード方法も含めてください。
+このファイルは、GitHub Copilot CLI にそのまま貼り付けたり、`@` で参照したりできるサンプルです。
 
-# タスク順序
-- 以下の順序でカスタムエージェントを順番に実行します。
-1, [.github/agents/makemd.md]
-- 最初に実行し、パワーポイントを作成するための準備としてマークダウンファイルを作成します。
-2, [.github/agents/checkmd.md]
-- 1 のマークダウンファイルの作成が正常に終わった後に実行し、作成されたマークダウンファイルの内容をレビューします。
-3, [.github/agents/createpptx.md]
-- 2 のチェックが正常に終わった後に実行し、作成されたマークダウンファイルからパワーポイントファイルを作成します。
-4, [.github/agents/finalize.md]
-- 3 のパワーポイント作成処理が正常に終わった最後に実行し、仕様の漏れがないかの最終チェックと是正を行います。
+## フルパイプラインで資料を作る
+```text
+@AGENTS.md @.github/instructions/createpptx.instructions.md
+「<テーマ>」をテーマに、<対象者> 向けの <枚数> 枚の PowerPoint 資料を作成してください。
+必要に応じて外部情報を参照し、`makemd` → `checkmd` → `createpptx` → `finalize` の順で完了まで進めてください。
+```
+
+## Markdown だけ作る
+```text
+@.github/agents/makemd.md
+「<テーマ>」のスライド構成 Markdown を作成してください。
+```
+
+## 既存 Markdown から PPTX だけ再生成する
+```text
+@.github/agents/createpptx.md @.github/instructions/createpptx.instructions.md
+`<テーマ名>/md/<テーマ名>.md` を使って PowerPoint を再生成してください。
+```
+
+## 最終調整だけ行う
+```text
+@.github/agents/finalize.md
+`<テーマ名>/docs/<テーマ名>.pptx` を最終確認して、テンプレート反映と修正メモ作成まで行ってください。
+```

@@ -1,13 +1,26 @@
-<!-- createpptx.md が終わった後、finalize.md を実行するためのカスタムエージェントファイル !-->
-# 役割
-- [.github/agents/createpptx.md] が終わった後、作成されたパワーポイント資料を最終確認し、必要に応じて修正するカスタムエージェントです。
+# Copilot CLI stage: finalize
 
-# タスク
-- [GHCP-PPTX/templates/footer.pptx] を最終シートに追加してください。
-- 表紙ページは [GHCP-PPTX/templates/header.pptx] に差し替えてください。その際、Title の箇所のみ既存のパワーポイントのタイトルとして変更して差し替えてください。
-- 作成されたパワーポイント資料を確認し、[.github/instructions/createpptx.instructions.md] に記載された条件に従っているか、仕様漏れがないかをレビューし、不足分や仕様外の部分を修正します。
-- 仕様に従っていない部分があれば、修正した上で、完成したパワーポイント資料を [docs/ディレクトリ] に保存してください。
-- 修正した箇所は、`<テーマ名>/docs/` ディレクトリに保存する前に、修正内容と理由を簡潔にまとめて`<テーマ名>/md/<テーマ名>-Finalized.md` という名前のマークダウンファイルに記載してください。
+このファイルは、生成済み PowerPoint を最終確認し、テンプレート反映と仕上げを行うときの stage 定義です。
 
-# 条件
-- データモデルは Claude Opus 4.6 を使用します。
+## 役割
+- 作成された `.pptx` を仕様に照らして確認し、必要に応じて修正します。
+
+## 入力
+- `<テーマ名>/docs/<テーマ名>.pptx`
+- `templates/header.pptx`
+- `templates/footer.pptx`
+- `.github/instructions/createpptx.instructions.md`
+
+## 出力
+- `<テーマ名>/docs/<テーマ名>.pptx`
+- `<テーマ名>/md/<テーマ名>-Finalized.md`
+
+## 作業内容
+- 表紙は `templates/header.pptx` を基準にし、タイトルだけ対象資料に合わせて差し替えます。
+- 最終スライドは `templates/footer.pptx` を基準にします。
+- 仕様漏れやレイアウト崩れがあれば修正します。
+- 修正内容と理由を `<テーマ名>-Finalized.md` に記録します。
+
+## 代替ルール
+- 環境の制約でテンプレート差し替えが難しい場合は、同等の表紙スライドと最終スライドを生成 deck 内に直接作成します。
+- 代替した場合は、その理由を `<テーマ名>-Finalized.md` に明記します。

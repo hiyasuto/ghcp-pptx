@@ -1,10 +1,20 @@
 ---
 name: create-pptx
-description: PowerPoint を新規に作成する指示があった際に、node.js の pptxgenjs を使用して .pptx 形式の資料を作成します。
+description: GitHub Copilot CLI で PowerPoint 資料を作成するときに、Markdown 設計、レビュー、PptxGenJS 生成、最終化までを一気通貫で進めます。
 ---
 
-## 基本レイアウト・デザイン条件
-- デザインは図解や箇条書きを活用し、視覚的にわかりやすくします。
-- スライドの内容は簡潔にまとめ、重要なポイントを強調します。
-- アイコンやイラストを適宜使用し、視覚的な興味を引きます。
-- 文字や図形、画像がシートからはみ出ないよう、１枚のシート内に収まるようにします。
+## Use when
+- 新規の提案資料や説明資料を作りたいとき
+- 既存の Markdown から `.pptx` を再生成したいとき
+- 表紙や末尾スライドを含めて仕上げたいとき
+
+## Outputs
+- `<テーマ名>/md/<テーマ名>.md`
+- `<テーマ名>/md/<テーマ名>-Checked.md`
+- `<テーマ名>/js/create-slide.js`
+- `<テーマ名>/docs/<テーマ名>.pptx`
+- `<テーマ名>/md/<テーマ名>-Finalized.md`
+
+## Notes
+- `templates/header.pptx` と `templates/footer.pptx` を使用します。
+- 詳細仕様は `.github/instructions/createpptx.instructions.md` を参照します。

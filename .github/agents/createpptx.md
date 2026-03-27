@@ -1,15 +1,26 @@
-<!-- checkmd.md が終わった後、createpptx.md を実行するためのカスタムエージェントファイル !-->
-# 役割
-- [.github/agents/checkmd.md] が終わった後、チェック済となった `<テーマ名>/md/<テーマ名>.md` ファイルをもとに、パワーポイント資料を作成するカスタムエージェントです。
+# Copilot CLI stage: createpptx
 
-# タスク
-- チェック済となった `<テーマ名>/md/<テーマ名>.md` ファイルをもとに、パワーポイント資料を作成します。
-- 作成するパワーポイントファイルの**基本仕様**は、[.github/instructions/createpptx.instructions.md] に記載された内容に従います。
-- 作成したパワーポイントファイルは `<テーマ名>/docs/<テーマ名>.pptx` という名前で保存します。
-- 外部参照したリンク先の内容は資料の後半に「参考リンク」としてまとめて記載してください。
+このファイルは、チェック済み Markdown から `.pptx` を生成するときの stage 定義です。
 
-# 条件
-- データモデルは Claude Opus 4.6 を使用します。
-- パワーポイントファイルの作成前に、node.js のバージョンを確認してください。
-  - node.js のバージョンが古い場合は、最新の安定版にアップデートしてください。
-- パワーポイントファイルの作成には、最新の ptxgenjs ライブラリを使用します。
+## 役割
+- `<テーマ名>/md/<テーマ名>.md` をもとに、PptxGenJS で PowerPoint 資料を作成します。
+
+## 入力
+- `<テーマ名>/md/<テーマ名>.md`
+- `<テーマ名>/md/<テーマ名>-Checked.md`
+- `.github/instructions/createpptx.instructions.md`
+
+## 出力
+- `<テーマ名>/js/create-slide.js`
+- `<テーマ名>/docs/<テーマ名>.pptx`
+
+## 作業内容
+- PowerPoint 作成前に `node --version` で Node.js のバージョンを確認します。
+- 必要なら `<テーマ名>/package.json` を作成し、`pptxgenjs` を導入します。
+- Markdown からスライドを生成する `create-slide.js` を作成します。
+- スクリプトを実行し、`.pptx` が出力されることを確認します。
+- 外部参照したリンク先の内容は資料後半の `参考リンク` スライドにまとめます。
+
+## 補足
+- 直接 `createpptx` だけを依頼された場合でも、Markdown の内容に明らかな欠落があれば簡易レビューを行います。
+- 図解が必要な箇所は、PptxGenJS の図形や表を使って表現します。
